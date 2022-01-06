@@ -15,6 +15,7 @@
         <title></title>
     </head>
     <body>
+        <div>Počet keřů v horní části vinice Kaňk 10 535</div>
         <div id="map">
         <img src="logo.png" alt="Logo">
         </div>
@@ -119,12 +120,14 @@
         map.addLayer(ortoRGB);
 
         var baseMaps = {
+
+
         };
         var LayerMaps = {
             
-            "Stromky": layer_Kank_hore_0,
+            "Keře": layer_Kank_hore_0,
             "Ortofoto RGB": ortoRGB,
-            "Počet 10 535": layer_cuzk,
+            "ČÚZK": layer_cuzk
             };
         L.control.layers(baseMaps,LayerMaps,{ 
             label: "Layers",
