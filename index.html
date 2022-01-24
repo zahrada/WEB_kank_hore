@@ -15,8 +15,6 @@
         <title></title>
     </head>
     <body>
-        <div>Počet stromů v horní části vinice Kaňk 10 535</div>
-        <div>Počet stromů v horní části vinice Svatých 8 917</div>
         <div id="map">
         <img src="logo.png" alt="Logo">
         </div>
@@ -34,14 +32,19 @@
         <script src="js/leaflet-measure.js"></script> <!--při dodržení adresářové struktury není nutné měnit-->       
         <script src="js/L.Control.Opacity.js"></script> <!--při dodržení adresářové struktury není nutné měnit-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.19/ua-parser.min.js"></script>
-        <script src="data/radky_kank_0.js"></script>
-        <script src="data/kank_body_1.js"></script>
-        <script src="data/radky_svatych_2.js"></script>
-        <script src="data/svatych_body_3.js"></script>
+        <script src="data/hranice_vinic_0.js"></script>
+        <script src="data/kank_hore_body_1.js"></script>
+        <script src="data/kank_hore_radky1_2.js"></script>
+        <script src="data/kank_mala_body_3.js"></script>
+        <script src="data/kank_mala_radky_4.js"></script>
+        <script src="data/vsech_svatych_dole_body_5.js"></script>
+        <script src="data/vsech_svatych_dole_radky_6.js"></script>
+        <script src="data/svatych_body_7.js"></script>
+        <script src="data/svatych_hore_radky_8.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:22, minZoom:1
-        }).fitBounds([[49.966,15.260],[49.969,15.280]]);
+        }).fitBounds([[49.950,15.255],[49.98,15.355]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -49,15 +52,10 @@
 
         function setBounds() {
         }
-        function pop_radky_kank_0(feature, layer) {
+        function pop_hranice_vinic_0(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">id</th>\
-                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">odruda</th>\
-                        <td>' + (feature.properties['odruda'] !== null ? autolinker.link(feature.properties['odruda'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">pocet</th>\
@@ -67,9 +65,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_radky_kank_0_0() {
+        function style_hranice_vinic_0_0() {
             return {
-                pane: 'pane_radky_kank_0',
+                pane: 'pane_hranice_vinic_0',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -78,30 +76,300 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,182,0,1.0)',
+                fillColor: 'rgba(243,166,178,1.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_radky_kank_0');
-        map.getPane('pane_radky_kank_0').style.zIndex = 400;
-        map.getPane('pane_radky_kank_0').style['mix-blend-mode'] = 'normal';
-        var layer_radky_kank_0 = new L.geoJson(json_radky_kank_0, {
+        map.createPane('pane_hranice_vinic_0');
+        map.getPane('pane_hranice_vinic_0').style.zIndex = 400;
+        map.getPane('pane_hranice_vinic_0').style['mix-blend-mode'] = 'normal';
+        var layer_hranice_vinic_0 = new L.geoJson(json_hranice_vinic_0, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_radky_kank_0',
-            layerName: 'layer_radky_kank_0',
-            pane: 'pane_radky_kank_0',
-            onEachFeature: pop_radky_kank_0,
-            style: style_radky_kank_0_0,
+            dataVar: 'json_hranice_vinic_0',
+            layerName: 'layer_hranice_vinic_0',
+            pane: 'pane_hranice_vinic_0',
+            onEachFeature: pop_hranice_vinic_0,
+            style: style_hranice_vinic_0_0,
         });
-        bounds_group.addLayer(layer_radky_kank_0);
-        map.addLayer(layer_radky_kank_0);
-        function pop_kank_body_1(feature, layer) {
+        bounds_group.addLayer(layer_hranice_vinic_0);
+        map.addLayer(layer_hranice_vinic_0);
+        function pop_kank_hore_body_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LAYER'] !== null ? autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_kank_body_1_0() {
+        function style_kank_hore_body_1_0() {
             return {
-                pane: 'pane_kank_body_1',
+                pane: 'pane_kank_hore_body_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_kank_hore_body_1');
+        map.getPane('pane_kank_hore_body_1').style.zIndex = 401;
+        map.getPane('pane_kank_hore_body_1').style['mix-blend-mode'] = 'normal';
+        var layer_kank_hore_body_1 = new L.geoJson(json_kank_hore_body_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kank_hore_body_1',
+            layerName: 'layer_kank_hore_body_1',
+            pane: 'pane_kank_hore_body_1',
+            onEachFeature: pop_kank_hore_body_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_kank_hore_body_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_kank_hore_body_1);
+        function pop_kank_hore_radky1_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">pocet</th>\
+                        <td>' + (feature.properties['pocet'] !== null ? autolinker.link(feature.properties['pocet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kank_hore_radky1_2_0() {
+            return {
+                pane: 'pane_kank_hore_radky1_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_kank_hore_radky1_2');
+        map.getPane('pane_kank_hore_radky1_2').style.zIndex = 402;
+        map.getPane('pane_kank_hore_radky1_2').style['mix-blend-mode'] = 'normal';
+        var layer_kank_hore_radky1_2 = new L.geoJson(json_kank_hore_radky1_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kank_hore_radky1_2',
+            layerName: 'layer_kank_hore_radky1_2',
+            pane: 'pane_kank_hore_radky1_2',
+            onEachFeature: pop_kank_hore_radky1_2,
+            style: style_kank_hore_radky1_2_0,
+        });
+        bounds_group.addLayer(layer_kank_hore_radky1_2);
+        map.addLayer(layer_kank_hore_radky1_2);
+        function pop_kank_mala_body_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LAYER</strong><br />' + (feature.properties['LAYER'] !== null ? autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kank_mala_body_3_0() {
+            return {
+                pane: 'pane_kank_mala_body_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_kank_mala_body_3');
+        map.getPane('pane_kank_mala_body_3').style.zIndex = 403;
+        map.getPane('pane_kank_mala_body_3').style['mix-blend-mode'] = 'normal';
+        var layer_kank_mala_body_3 = new L.geoJson(json_kank_mala_body_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kank_mala_body_3',
+            layerName: 'layer_kank_mala_body_3',
+            pane: 'pane_kank_mala_body_3',
+            onEachFeature: pop_kank_mala_body_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_kank_mala_body_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_kank_mala_body_3);
+        function pop_kank_mala_radky_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">pocet</th>\
+                        <td>' + (feature.properties['pocet'] !== null ? autolinker.link(feature.properties['pocet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kank_mala_radky_4_0() {
+            return {
+                pane: 'pane_kank_mala_radky_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_kank_mala_radky_4');
+        map.getPane('pane_kank_mala_radky_4').style.zIndex = 404;
+        map.getPane('pane_kank_mala_radky_4').style['mix-blend-mode'] = 'normal';
+        var layer_kank_mala_radky_4 = new L.geoJson(json_kank_mala_radky_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kank_mala_radky_4',
+            layerName: 'layer_kank_mala_radky_4',
+            pane: 'pane_kank_mala_radky_4',
+            onEachFeature: pop_kank_mala_radky_4,
+            style: style_kank_mala_radky_4_0,
+        });
+        bounds_group.addLayer(layer_kank_mala_radky_4);
+        map.addLayer(layer_kank_mala_radky_4);
+        function pop_vsech_svatych_dole_body_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_vsech_svatych_dole_body_5_0() {
+            return {
+                pane: 'pane_vsech_svatych_dole_body_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_vsech_svatych_dole_body_5');
+        map.getPane('pane_vsech_svatych_dole_body_5').style.zIndex = 405;
+        map.getPane('pane_vsech_svatych_dole_body_5').style['mix-blend-mode'] = 'normal';
+        var layer_vsech_svatych_dole_body_5 = new L.geoJson(json_vsech_svatych_dole_body_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_vsech_svatych_dole_body_5',
+            layerName: 'layer_vsech_svatych_dole_body_5',
+            pane: 'pane_vsech_svatych_dole_body_5',
+            onEachFeature: pop_vsech_svatych_dole_body_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_vsech_svatych_dole_body_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_vsech_svatych_dole_body_5);
+        function pop_vsech_svatych_dole_radky_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">pocet</th>\
+                        <td>' + (feature.properties['pocet'] !== null ? autolinker.link(feature.properties['pocet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_vsech_svatych_dole_radky_6_0() {
+            return {
+                pane: 'pane_vsech_svatych_dole_radky_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_vsech_svatych_dole_radky_6');
+        map.getPane('pane_vsech_svatych_dole_radky_6').style.zIndex = 406;
+        map.getPane('pane_vsech_svatych_dole_radky_6').style['mix-blend-mode'] = 'normal';
+        var layer_vsech_svatych_dole_radky_6 = new L.geoJson(json_vsech_svatych_dole_radky_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_vsech_svatych_dole_radky_6',
+            layerName: 'layer_vsech_svatych_dole_radky_6',
+            pane: 'pane_vsech_svatych_dole_radky_6',
+            onEachFeature: pop_vsech_svatych_dole_radky_6,
+            style: style_vsech_svatych_dole_radky_6_0,
+        });
+        bounds_group.addLayer(layer_vsech_svatych_dole_radky_6);
+        map.addLayer(layer_vsech_svatych_dole_radky_6);
+        function pop_svatych_body_7(feature, layer) {
+        }
+
+        function style_svatych_body_7_0() {
+            return {
+                pane: 'pane_svatych_body_7',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -112,38 +380,32 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(143,17,36,1.0)',
-                interactive: false,
+                interactive: true,
             }
         }
-        map.createPane('pane_kank_body_1');
-        map.getPane('pane_kank_body_1').style.zIndex = 401;
-        map.getPane('pane_kank_body_1').style['mix-blend-mode'] = 'normal';
-        var layer_kank_body_1 = new L.geoJson(json_kank_body_1, {
+        map.createPane('pane_svatych_body_7');
+        map.getPane('pane_svatych_body_7').style.zIndex = 407;
+        map.getPane('pane_svatych_body_7').style['mix-blend-mode'] = 'normal';
+        var layer_svatych_body_7 = new L.geoJson(json_svatych_body_7, {
             attribution: '',
-            interactive: false,
-            dataVar: 'json_kank_body_1',
-            layerName: 'layer_kank_body_1',
-            pane: 'pane_kank_body_1',
-            onEachFeature: pop_kank_body_1,
+            interactive: true,
+            dataVar: 'json_svatych_body_7',
+            layerName: 'layer_svatych_body_7',
+            pane: 'pane_svatych_body_7',
+            onEachFeature: pop_svatych_body_7,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_kank_body_1_0(feature));
+                return L.circleMarker(latlng, style_svatych_body_7_0(feature));
             },
         });
-        bounds_group.addLayer(layer_kank_body_1);
-        
-        function pop_radky_svatych_2(feature, layer) {
+        bounds_group.addLayer(layer_svatych_body_7);
+        function pop_svatych_hore_radky_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">id</th>\
-                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">odruda</th>\
-                        <td>' + (feature.properties['odruda'] !== null ? autolinker.link(feature.properties['odruda'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">pocet</th>\
@@ -153,9 +415,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_radky_svatych_2_0() {
+        function style_svatych_hore_radky_8_0() {
             return {
-                pane: 'pane_radky_svatych_2',
+                pane: 'pane_svatych_hore_radky_8',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -164,73 +426,27 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,182,0,1.0)',
+                fillColor: 'rgba(231,113,72,1.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_radky_svatych_2');
-        map.getPane('pane_radky_svatych_2').style.zIndex = 402;
-        map.getPane('pane_radky_svatych_2').style['mix-blend-mode'] = 'normal';
-        var layer_radky_svatych_2 = new L.geoJson(json_radky_svatych_2, {
+        map.createPane('pane_svatych_hore_radky_8');
+        map.getPane('pane_svatych_hore_radky_8').style.zIndex = 408;
+        map.getPane('pane_svatych_hore_radky_8').style['mix-blend-mode'] = 'normal';
+        var layer_svatych_hore_radky_8 = new L.geoJson(json_svatych_hore_radky_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_radky_svatych_2',
-            layerName: 'layer_radky_svatych_2',
-            pane: 'pane_radky_svatych_2',
-            onEachFeature: pop_radky_svatych_2,
-            style: style_radky_svatych_2_0,
+            dataVar: 'json_svatych_hore_radky_8',
+            layerName: 'layer_svatych_hore_radky_8',
+            pane: 'pane_svatych_hore_radky_8',
+            onEachFeature: pop_svatych_hore_radky_8,
+            style: style_svatych_hore_radky_8_0,
         });
-        bounds_group.addLayer(layer_radky_svatych_2);
-        map.addLayer(layer_radky_svatych_2);
-        function pop_svatych_body_3(feature, layer) {
-        }
-
-        function style_svatych_body_3_0() {
-            return {
-                pane: 'pane_svatych_body_3',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(143,17,36,1.0)',
-                interactive: false,
-            }
-        }
-        map.createPane('pane_svatych_body_3');
-        map.getPane('pane_svatych_body_3').style.zIndex = 403;
-        map.getPane('pane_svatych_body_3').style['mix-blend-mode'] = 'normal';
-        var layer_svatych_body_3 = new L.geoJson(json_svatych_body_3, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_svatych_body_3',
-            layerName: 'layer_svatych_body_3',
-            pane: 'pane_svatych_body_3',
-            onEachFeature: pop_svatych_body_3,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_svatych_body_3_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_svatych_body_3);
-    
-
+        bounds_group.addLayer(layer_svatych_hore_radky_8);
+        map.addLayer(layer_svatych_hore_radky_8);
+        setBounds();
 
         var ortoRGB = L.tileLayer('./data/rgb/{z}/{x}/{y}.jpg', {
-        minZoom: 15,
-        maxZoom: 22,
-        tms: false,
-        attribution: 'Generated by TilesXYZ'
-        });
-
-        var orto1RGB = L.tileLayer('./data/rgb_svaty_hore/{z}/{x}/{y}.jpg', {
         minZoom: 15,
         maxZoom: 22,
         tms: false,
@@ -250,7 +466,6 @@
         });
 
         map.addLayer(ortoRGB);
-        map.addLayer(orto1RGB);
         map.addLayer(layer_cuzk);
 
         var baseMaps = {
@@ -258,10 +473,15 @@
         var LayerMaps = {
             "Ortofoto RGB": ortoRGB,
             "ČÚZK": layer_cuzk,
-            "Svatých stromky": layer_svatych_body_3,
-            "Svatých řádky": layer_radky_svatych_2,
-            "Kaňk stromky": layer_kank_body_1,
-            "Kaňk řádky": layer_radky_kank_0,
+            "Hranice vinic": layer_hranice_vinic_0,
+            "Svatých hore stromky": layer_svatych_body_7,
+            "Svatých hore řádky": layer_svatych_hore_radky_8,
+            "Svatých spodek stromky": layer_vsech_svatych_dole_body_5,
+            "Svatých spodek řádky": layer_vsech_svatych_dole_radky_6,
+            "Kaňk stromky": layer_kank_hore_body_1,
+            "Kaňk řádky": layer_kank_hore_radky1_2,
+            "Kaňk malá stromky": layer_kank_mala_body_3,
+            "Kaňk malá řádky": layer_kank_mala_radky_4,
             };
         L.control.layers(baseMaps,LayerMaps,{ 
             label: "Layers",
