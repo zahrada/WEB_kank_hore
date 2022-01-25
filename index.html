@@ -41,6 +41,7 @@
         <script src="data/vsech_svatych_dole_radky_6.js"></script>
         <script src="data/svatych_body_7.js"></script>
         <script src="data/svatych_hore_radky_8.js"></script>
+        <script src="data/kacina_radky_0.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:22, minZoom:1
@@ -446,6 +447,54 @@
         map.addLayer(layer_svatych_hore_radky_8);
         setBounds();
 
+        function pop_kacina_radky_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">pocet</th>\
+                        <td>' + (feature.properties['pocet'] !== null ? autolinker.link(feature.properties['pocet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">odruda</th>\
+                        <td>' + (feature.properties['odruda'] !== null ? autolinker.link(feature.properties['odruda'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kacina_radky_0_0() {
+            return {
+                pane: 'pane_kacina_radky_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_kacina_radky_0');
+        map.getPane('pane_kacina_radky_0').style.zIndex = 400;
+        map.getPane('pane_kacina_radky_0').style['mix-blend-mode'] = 'normal';
+        var layer_kacina_radky_0 = new L.geoJson(json_kacina_radky_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kacina_radky_0',
+            layerName: 'layer_kacina_radky_0',
+            pane: 'pane_kacina_radky_0',
+            onEachFeature: pop_kacina_radky_0,
+            style: style_kacina_radky_0_0,
+        });
+        bounds_group.addLayer(layer_kacina_radky_0);
+        map.addLayer(layer_kacina_radky_0);
+
         var ortoRGB = L.tileLayer('./data/rgb/{z}/{x}/{y}.jpg', {
         minZoom: 15,
         maxZoom: 22,
@@ -482,6 +531,7 @@
             "Kaňk řádky": layer_kank_hore_radky1_2,
             "Kaňk malá stromky": layer_kank_mala_body_3,
             "Kaňk malá řádky": layer_kank_mala_radky_4,
+            "Kačina řádky": layer_kacina_radky_0_0,
             };
         L.control.layers(baseMaps,LayerMaps,{ 
             label: "Layers",
